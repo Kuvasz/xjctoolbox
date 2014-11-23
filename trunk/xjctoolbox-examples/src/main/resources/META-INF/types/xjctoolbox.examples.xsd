@@ -43,12 +43,33 @@
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="user">
-		<xsd:sequence>
-			<xsd:element name="Id" type="userId"/>
-			<xsd:element name="Name" type="xsd:string"/>
-			<xsd:element name="Vehicles" type="vehicle" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
-	</xsd:complexType>
+	<xsd:simpleType name="phoneNumber">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<annotation class="xjctoolbox.examples.PhoneNumberValidation" />
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1" />
+			<xsd:maxLength value="16" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:element name="User">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<implements interface="xjctoolbox.examples.GetNameAware" />
+				<implements interface="xjctoolbox.examples.SetNameAware" />
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Id" type="userId"/>
+				<xsd:element name="Name" type="xsd:string"/>
+				<xsd:element name="Vehicles" type="vehicle" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="PhoneNumber" type="phoneNumber"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
 
 </xsd:schema>

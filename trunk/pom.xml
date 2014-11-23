@@ -8,6 +8,7 @@
 	<name>XJC Toolbox - Parent</name>
 
 	<properties>
+		<com.fasterxml.jackson.version>2.4.3</com.fasterxml.jackson.version>
 		<com.sun.xml.bind.jaxb.version>2.2.6</com.sun.xml.bind.jaxb.version>
 		<junit.version>4.11</junit.version>
 		<org.apache.maven.plugins.maven-compiler-plugin.version>2.3.2</org.apache.maven.plugins.maven-compiler-plugin.version>
@@ -24,6 +25,26 @@
 				<scope>provided</scope>
 			</dependency>
 	
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.module</groupId>
+				<artifactId>jackson-module-jaxb-annotations</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>${com.sun.xml.bind.jaxb.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
