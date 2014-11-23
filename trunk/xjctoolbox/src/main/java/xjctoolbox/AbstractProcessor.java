@@ -109,17 +109,17 @@ public abstract class AbstractProcessor
 		{
 			try
 			{
-				if (path.contains("."))
-				{
-					int index = path.indexOf(".");
-					Field field = getField(source.getClass(), path.substring(0, index), false);
-					Object nextSource = field.get(source);
-					prop = getProperty(nextSource, path.substring(index + 1));
-				}
-				else
+				int separatorIndex = path.indexOf(".");
+				if (separatorIndex < 0)
 				{
 					Field field = getField(source.getClass(), path, true);
 					prop = field.get(source);
+				}
+				else
+				{
+					Field field = getField(source.getClass(), path.substring(0, separatorIndex), false);
+					Object nextSource = field.get(source);
+					prop = getProperty(nextSource, path.substring(separatorIndex + 1));
 				}
 			}
 			catch (Exception e)
@@ -138,7 +138,14 @@ public abstract class AbstractProcessor
 		Class<?> currentSource = source;
 		do
 		{
-			result = currentSource.getDeclaredField(property);
+			try
+			{
+				result = currentSource.getDeclaredField(property);
+			}
+			catch (NoSuchFieldException e)
+			{
+				// no action
+			}
 			currentSource = currentSource.getSuperclass();
 		}
 		while (currentSource != null && result == null && drillDown);
