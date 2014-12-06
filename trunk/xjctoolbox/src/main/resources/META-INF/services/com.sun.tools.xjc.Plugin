@@ -1,3 +1,4 @@
 xjctoolbox.AddSimpleContentConstructorPlugin
 xjctoolbox.AddListSetterPlugin
 xjctoolbox.CustomAppinfoPlugin
+xjctoolbox.PrimitiveToWrapperPlugin

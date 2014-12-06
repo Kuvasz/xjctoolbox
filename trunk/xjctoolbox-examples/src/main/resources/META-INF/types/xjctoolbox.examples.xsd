@@ -71,5 +71,38 @@
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
+	
+	<xsd:element name="Types1">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Tboolean" type="xsd:boolean"/>
+				<xsd:element name="Tbyte" type="xsd:byte"/>
+				<xsd:element name="Tshort" type="xsd:short"/>
+				<xsd:element name="Tint" type="xsd:int"/>
+				<xsd:element name="Tlong" type="xsd:long"/>
+				<xsd:element name="Tfloat" type="xsd:float"/>
+				<xsd:element name="Tdouble" type="xsd:double"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="Types2">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<keepPrimitives/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Tboolean" type="xsd:boolean"/>
+				<xsd:element name="Tbyte" type="xsd:byte"/>
+				<xsd:element name="Tshort" type="xsd:short"/>
+				<xsd:element name="Tint" type="xsd:int"/>
+				<xsd:element name="Tlong" type="xsd:long"/>
+				<xsd:element name="Tfloat" type="xsd:float"/>
+				<xsd:element name="Tdouble" type="xsd:double"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
 
 </xsd:schema>

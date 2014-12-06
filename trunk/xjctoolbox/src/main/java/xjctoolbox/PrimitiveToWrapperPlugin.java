@@ -8,9 +8,9 @@ import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.Outline;
 
-public class CustomAppinfoPlugin extends Plugin
+public class PrimitiveToWrapperPlugin extends Plugin
 {
-	public static final String OPTION_NAME = "XXjcToolboxCustomAppinfo";
+	public static final String OPTION_NAME = "XXjcToolboxPrimitiveToWrapper";
 
 	@Override
 	public String getOptionName()
@@ -21,7 +21,7 @@ public class CustomAppinfoPlugin extends Plugin
 	@Override
 	public String getUsage()
 	{
-		return "-" + OPTION_NAME + ": Makes available to add interface implementations, annotations to classes/fields.\n";
+		return "-" + OPTION_NAME + ": Converts primitives to their wrappers. (E.g. int to Integer)\n";
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class CustomAppinfoPlugin extends Plugin
 	{
 		for (ClassOutline classOutline : outline.getClasses())
 		{
-			CustomAppinfo processor = new CustomAppinfo();
+			AbstractProcessor processor = new PrimitiveToWrapper();
 			processor.setOutline(outline);
 			processor.setClassOutline(classOutline);
 			processor.setVerbose(true);

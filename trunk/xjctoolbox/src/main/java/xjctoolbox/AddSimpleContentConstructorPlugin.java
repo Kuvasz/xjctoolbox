@@ -10,7 +10,7 @@ import com.sun.tools.xjc.outline.Outline;
 
 public class AddSimpleContentConstructorPlugin extends Plugin
 {
-	public static final String OPTION_NAME = "XAddSimpleContentConstructor";
+	public static final String OPTION_NAME = "XXjcToolboxAddSimpleContentConstructor";
 
 	@Override
 	public String getOptionName()

@@ -10,7 +10,7 @@ import com.sun.tools.xjc.outline.Outline;
 
 public class AddListSetterPlugin extends Plugin
 {
-	public static final String OPTION_NAME = "XAddListSetter";
+	public static final String OPTION_NAME = "XXjcToolboxAddListSetter";
 
 	@Override
 	public String getOptionName()
