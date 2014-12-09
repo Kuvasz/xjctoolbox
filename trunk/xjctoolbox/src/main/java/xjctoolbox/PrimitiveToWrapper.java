@@ -6,11 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.codemodel.JBlock;
-import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
-import com.sun.codemodel.JMod;
 import com.sun.codemodel.JType;
 import com.sun.codemodel.JVar;
 import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIXPluginCustomization;
@@ -86,7 +83,7 @@ public class PrimitiveToWrapper extends AbstractProcessor
 		
 		if (isBoolean)
 		{
-			addGetterBoolean(field);
+			changeBooleanIsToGet(getterMethod, field);
 		}
 	}
 
@@ -116,14 +113,12 @@ public class PrimitiveToWrapper extends AbstractProcessor
 	/*
 	 * Boolean isBoolean() is not a valid JavaBean so sometimes Boolean getBoolean() can be useful.
 	 */
-	protected void addGetterBoolean(JFieldVar field)
+	protected void changeBooleanIsToGet(JMethod method, JFieldVar field)
 	{
 		String fieldName = getFieldName(field);
-		String methodName = GETTER + fieldName;
+		String newMethodName = GETTER + fieldName;
 		
-		JMethod getter = getImplClass().method(JMod.PUBLIC, field.type(), methodName);
-		JBlock body = getter.body();
-		body._return(JExpr.refthis(field.name()));
+		method.name(newMethodName);
 	}
 	
 	// TODO almost same method as in CustomAppinfo

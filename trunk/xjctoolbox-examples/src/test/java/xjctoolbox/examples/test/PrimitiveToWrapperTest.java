@@ -14,7 +14,6 @@ public class PrimitiveToWrapperTest
 		Types1 types1 = new Types1();
 		
 		types1.setTboolean(null);
-		Assert.assertNull(types1.isTboolean());
 		Assert.assertNull(types1.getTboolean());
 		
 		types1.setTbyte(null);
