@@ -1,14 +1,18 @@
 package xjctoolbox;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import com.sun.codemodel.JBlock;
+import com.sun.codemodel.JClass;
 import com.sun.codemodel.JConditional;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JFieldVar;
+import com.sun.codemodel.JInvocation;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JVar;
@@ -26,6 +30,36 @@ public class AddSimpleContentConstructor extends AbstractProcessor
 		methodNames.add(METHOD_SETTER);
 		METHOD_NAMES = Collections.unmodifiableSet(methodNames);
 	}
+	public static final Map<String, PrimitiveConst> PRIMITIVES;
+	static
+	{
+		Map<String, PrimitiveConst> primitives = new HashMap<String, PrimitiveConst>();
+		primitives.put("byte", new PrimitiveConst(Byte.class, "parseByte"));
+		primitives.put("short", new PrimitiveConst(Short.class, "parseShort"));
+		primitives.put("int", new PrimitiveConst(Integer.class, "parseInt"));
+		primitives.put("long", new PrimitiveConst(Long.class, "parseLong"));
+		primitives.put("float", new PrimitiveConst(Float.class, "parseFloat"));
+		primitives.put("double", new PrimitiveConst(Double.class, "parseDouble"));
+		primitives.put("boolean", new PrimitiveConst(Boolean.class, "parseBoolean"));
+		primitives.put("char", new PrimitiveConst(Character.class, "toString"));
+
+		PRIMITIVES = Collections.unmodifiableMap(primitives);
+	}
+	public static final Set<String> WRAPPERS;
+	static
+	{
+		
+		Set<String> wrappers = new HashSet<String>();
+		wrappers.add("Byte");
+		wrappers.add("Short");
+		wrappers.add("Integer");
+		wrappers.add("Long");
+		wrappers.add("Float");
+		wrappers.add("Double");
+		wrappers.add("Boolean");
+
+		WRAPPERS = Collections.unmodifiableSet(wrappers);
+	}
 	
 	@Override
 	public void process()
@@ -34,6 +68,7 @@ public class AddSimpleContentConstructor extends AbstractProcessor
 		{
 			appendDefaultConstructor();
 			appendConstructor();
+			appendStringConstructor();
 			appendToString();
 			appendEquals();
 			appendHashCode();
@@ -82,6 +117,36 @@ public class AddSimpleContentConstructor extends AbstractProcessor
 		cs.param(field.type(), FIELD_NAME);
 		JBlock body = cs.body();
 		body.assign(JExpr.refthis(FIELD_NAME), JExpr.ref(FIELD_NAME));
+	}
+	
+	protected void appendStringConstructor()
+	{
+		JFieldVar field = getImplClass().fields().get(FIELD_NAME);
+		String sType = field.type().name();
+		if (!"String".equals(sType))
+		{
+			JMethod cs = getImplClass().constructor(JMod.PUBLIC);
+			cs.param(String.class, FIELD_NAME);
+			JBlock body = cs.body();
+			
+			JInvocation inv;
+			JClass jClass = getCodeModel().ref(field.type().fullName());
+			if (field.type().isPrimitive())
+			{
+				PrimitiveConst pc = PRIMITIVES.get(sType);
+				inv = getCodeModel().ref(pc.wrapper).staticInvoke(pc.method).arg(JExpr.ref(FIELD_NAME));
+			}
+			else if (WRAPPERS.contains(sType))
+			{
+				inv = getCodeModel().ref(sType).staticInvoke("valueOf").arg(JExpr.ref(FIELD_NAME));
+			}
+			else
+			{
+				inv = JExpr._new(jClass).arg(JExpr.ref(FIELD_NAME));
+			}
+			
+			body.assign(JExpr.refthis(FIELD_NAME), inv);
+		}
 	}
 	
 	protected void appendToString()
@@ -160,6 +225,18 @@ public class AddSimpleContentConstructor extends AbstractProcessor
 			
 			ct._return(field.invoke("hashCode"));
 			ce._return(JExpr._super().invoke("hashCode"));
+		}
+	}
+	
+	private static class PrimitiveConst
+	{
+		public Class<?> wrapper;
+		public String method;
+		
+		public PrimitiveConst(Class<?> wrapper, String method)
+		{
+			this.wrapper = wrapper;
+			this.method = method;
 		}
 	}
 }

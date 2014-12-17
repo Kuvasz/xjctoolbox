@@ -36,6 +36,16 @@
 			<xsd:extension base="countSimpleType"></xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
+	<xsd:complexType name="count2">
+		<xsd:annotation>
+			<xsd:appinfo>
+				<keepPrimitives/>
+			</xsd:appinfo>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="countSimpleType"></xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
 	
 	<xsd:complexType name="vehicle">
 		<xsd:sequence>

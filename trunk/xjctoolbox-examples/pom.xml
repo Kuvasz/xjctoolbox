@@ -82,10 +82,10 @@
 					<extension>true</extension>
 					
 					<args>
+						<arg>-XXjcToolboxPrimitiveToWrapper</arg>
 						<arg>-XXjcToolboxAddSimpleContentConstructor</arg>
 						<arg>-XXjcToolboxAddListSetter</arg>
 						<arg>-XXjcToolboxCustomAppinfo</arg>
-						<arg>-XXjcToolboxPrimitiveToWrapper</arg>
 					</args>
 					<plugins>
 						<plugin>
