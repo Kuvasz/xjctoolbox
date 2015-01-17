@@ -19,6 +19,7 @@ public class PrimitiveToWrapper extends AbstractProcessor
 	public static final String SETTER = "set";
 	public static final String GETTER = "get";
 	public static final String GETTER_BOOLEAN = "is";
+	public static final String BOOLEAN_WRAPPER = "Boolean";
 	public static final Map<String, Class<?>> PRIMITIVES;
 	static
 	{
@@ -47,6 +48,10 @@ public class PrimitiveToWrapper extends AbstractProcessor
 				if (field.type().isPrimitive())
 				{
 					convertToWrapper(field, methods);
+				}
+				else if (BOOLEAN_WRAPPER.equals(field.type().name()))
+				{
+					convertBooleanIsToGet(field, methods);
 				}
 			}
 		}
@@ -82,6 +87,17 @@ public class PrimitiveToWrapper extends AbstractProcessor
 		convertGetterMethodToWrapper(getterMethod);
 		
 		if (isBoolean)
+		{
+			changeBooleanIsToGet(getterMethod, field);
+		}
+	}
+	
+	protected void convertBooleanIsToGet(JFieldVar field, Map<String, JMethod> methods)
+	{
+		String fieldName = getFieldName(field);
+		String getterMethodName = GETTER_BOOLEAN + fieldName;
+		JMethod getterMethod = methods.get(getterMethodName);
+		if (getterMethod != null)
 		{
 			changeBooleanIsToGet(getterMethod, field);
 		}
