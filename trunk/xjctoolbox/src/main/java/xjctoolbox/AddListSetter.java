@@ -1,5 +1,7 @@
 package xjctoolbox;
 
+import xjctoolbox.helper.Element;
+
 import com.sun.codemodel.JBlock;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
@@ -7,7 +9,6 @@ import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.tools.xjc.model.CElementPropertyInfo;
 import com.sun.tools.xjc.model.CPropertyInfo;
-import com.sun.xml.xsom.impl.ParticleImpl;
 
 public class AddListSetter extends AbstractProcessor
 {
@@ -18,14 +19,13 @@ public class AddListSetter extends AbstractProcessor
 		{
 			if (property instanceof CElementPropertyInfo)
 			{
-				CElementPropertyInfo elementProperty = (CElementPropertyInfo) property;
-				ParticleImpl particle = (ParticleImpl) elementProperty.getSchemaComponent();
-				int maxOccurs = getPropertyInt(particle, "maxOccurs");
+				Element element = new Element((CElementPropertyInfo) property);
+				int maxOccurs = element.getMaxOccurs();
 				
 				boolean unbounded = maxOccurs < 0;
 				if (unbounded)
 				{
-					appendSetList(elementProperty);
+					appendSetList(element.getPropertyInfo());
 				}
 			}
 		}

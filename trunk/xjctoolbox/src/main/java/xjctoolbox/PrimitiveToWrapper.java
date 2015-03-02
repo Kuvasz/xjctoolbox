@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import xjctoolbox.helper.Source;
+
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JType;
@@ -142,10 +144,11 @@ public class PrimitiveToWrapper extends AbstractProcessor
 	{
 		boolean result = false;
 		
-		Object source = getProperty(getTarget(), "source");
-		Object annotation1 = getProperty(source, "annotation");
-		Object annotation2 = getProperty(annotation1, "annotation");
-		List<?> decl = (List<?>) getProperty(annotation2, "decls");
+		List<?> decl = (List<?>) new Source(getTarget())
+			.getSource("source")
+			.getSource("annotation")
+			.getSource("annotation")
+			.get("decls");
 
 		if (decl != null)
 		{

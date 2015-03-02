@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.w3c.dom.Node;
 
+import xjctoolbox.helper.Source;
+
 import com.sun.codemodel.JClass;
 import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIXPluginCustomization;
 
@@ -24,10 +26,11 @@ public class CustomAppinfo extends AbstractProcessor
 	
 	protected void processClassAppinfo()
 	{
-		Object source = getProperty(getTarget(), "source");
-		Object annotation1 = getProperty(source, "annotation");
-		Object annotation2 = getProperty(annotation1, "annotation");
-		List<?> decl = (List<?>) getProperty(annotation2, "decls");
+		List<?> decl = (List<?>) new Source(getTarget())
+			.getSource("source")
+			.getSource("annotation")
+			.getSource("annotation")
+			.get("decls");
 
 		if (decl != null)
 		{
