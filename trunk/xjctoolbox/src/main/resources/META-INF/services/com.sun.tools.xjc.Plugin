@@ -2,3 +2,4 @@ xjctoolbox.AddSimpleContentConstructorPlugin
 xjctoolbox.AddListSetterPlugin
 xjctoolbox.CustomAppinfoPlugin
 xjctoolbox.PrimitiveToWrapperPlugin
+xjctoolbox.Jsr303AnnotationsPlugin

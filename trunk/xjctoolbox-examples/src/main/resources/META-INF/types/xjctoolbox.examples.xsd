@@ -2,8 +2,13 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns="http://xjctoolbox.examples"
 	targetNamespace="http://xjctoolbox.examples"
+	xmlns:base="http://xjctoolbox.examples.base"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb">
 
+
+	<xsd:import namespace="http://xjctoolbox.examples.base"
+		schemaLocation="./xjctoolbox.examples.base.xsd" />
+		 
 	
 	<xsd:simpleType name="userIdSimpleType">
 		<xsd:annotation>
@@ -111,6 +116,365 @@
 				<xsd:element name="Tlong" type="xsd:long"/>
 				<xsd:element name="Tfloat" type="xsd:float"/>
 				<xsd:element name="Tdouble" type="xsd:double"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!--
+	e1 min = 1 max = 1
+	e2 min = 0 max = 1
+	e3 min = 1 max = -1
+	e4 min = 0 max = -1
+	e5 min = 1 max = 10
+	e6 min = 5 max = 10
+	e7 min = 0 max = 10 
+	 -->
+	<xsd:element name="MinMaxOccursTest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="E1" type="xsd:int"/>
+				<xsd:element name="E2" type="xsd:int" minOccurs="0"/>
+				<xsd:element name="E3" type="xsd:int" maxOccurs="unbounded"/>
+				<xsd:element name="E4" type="xsd:int" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="E5" type="xsd:int" maxOccurs="10"/>
+				<xsd:element name="E6" type="xsd:int" minOccurs="5" maxOccurs="10"/>
+				<xsd:element name="E7" type="xsd:int" minOccurs="0" maxOccurs="10"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:simpleType name="byte1">
+		<xsd:restriction base="xsd:byte">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="int1">
+		<xsd:restriction base="xsd:int">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="integer1">
+		<xsd:restriction base="xsd:integer">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="long1">
+		<xsd:restriction base="xsd:long">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="negativeInteger1">
+		<xsd:restriction base="xsd:negativeInteger">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="nonNegativeInteger1">
+		<xsd:restriction base="xsd:nonNegativeInteger">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="nonPositiveInteger1">
+		<xsd:restriction base="xsd:nonPositiveInteger">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="positiveInteger1">
+		<xsd:restriction base="xsd:positiveInteger">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="unsignedLong1">
+		<xsd:restriction base="xsd:unsignedLong">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="unsignedInt1">
+		<xsd:restriction base="xsd:unsignedInt">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="unsignedShort1">
+		<xsd:restriction base="xsd:unsignedShort">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="unsignedByte1">
+		<xsd:restriction base="xsd:unsignedByte">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="short1">
+		<xsd:restriction base="xsd:short">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="double1">
+		<xsd:restriction base="xsd:double">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="decimal1">
+		<xsd:restriction base="xsd:decimal">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="string1">
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="boolean1">
+		<xsd:restriction base="xsd:boolean">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="float1">
+		<xsd:restriction base="xsd:float">
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="byte2">
+		<xsd:restriction base="xsd:byte">
+			<xsd:minInclusive value="30"/>
+			<xsd:maxInclusive value="40"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="int2">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="30"/>
+			<xsd:maxInclusive value="40"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="integer2">
+		<xsd:restriction base="xsd:integer">
+			<xsd:minInclusive value="30"/>
+			<xsd:maxInclusive value="40"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="long2">
+		<xsd:restriction base="xsd:long">
+			<xsd:minInclusive value="30"/>
+			<xsd:maxInclusive value="40"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="negativeInteger2">
+		<xsd:restriction base="xsd:negativeInteger">
+			<xsd:minInclusive value="-40"/>
+			<xsd:maxInclusive value="-30"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="nonNegativeInteger2">
+		<xsd:restriction base="xsd:nonNegativeInteger">
+			<xsd:minInclusive value="30"/>
+			<xsd:maxInclusive value="40"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="nonPositiveInteger2">
+		<xsd:restriction base="xsd:nonPositiveInteger">
+			<xsd:minInclusive value="-40"/>
+			<xsd:maxInclusive value="-30"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="positiveInteger2">
+		<xsd:restriction base="xsd:positiveInteger">
+			<xsd:minInclusive value="30"/>
+			<xsd:maxInclusive value="40"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="unsignedLong2">
+		<xsd:restriction base="xsd:unsignedLong">
+			<xsd:minInclusive value="30"/>
+			<xsd:maxInclusive value="40"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="unsignedInt2">
+		<xsd:restriction base="xsd:unsignedInt">
+			<xsd:minInclusive value="30"/>
+			<xsd:maxInclusive value="40"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="unsignedShort2">
+		<xsd:restriction base="xsd:unsignedShort">
+			<xsd:minInclusive value="30"/>
+			<xsd:maxInclusive value="40"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="unsignedByte2">
+		<xsd:restriction base="xsd:unsignedByte">
+			<xsd:minInclusive value="30"/>
+			<xsd:maxInclusive value="40"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="short2">
+		<xsd:restriction base="xsd:short">
+			<xsd:minInclusive value="30"/>
+			<xsd:maxInclusive value="40"/>
+			<xsd:totalDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="double2">
+		<xsd:restriction base="xsd:double">
+			<xsd:minInclusive value="10.1"/>
+			<xsd:maxInclusive value="1000.1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="decimal2">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:minInclusive value="10.1"/>
+			<xsd:maxInclusive value="1000.1"/>
+			<xsd:totalDigits value="7"/>
+			<xsd:fractionDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="decimal22">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:minExclusive value="10.1"/>
+			<xsd:maxExclusive value="1000.1"/>
+			<xsd:totalDigits value="7"/>
+			<xsd:fractionDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="string2">
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="10"/>
+			<xsd:pattern value="[A-Z]"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="string22">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="9"/>
+			<xsd:maxLength value="11"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="float2">
+		<xsd:restriction base="xsd:float">
+			<xsd:minInclusive value="10.1"/>
+			<xsd:maxInclusive value="1000.1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:element name="SimpleTypeTest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="byte0" type="xsd:byte" minOccurs="0"/>
+				<xsd:element name="decimal0" type="xsd:decimal" minOccurs="0"/>
+				<xsd:element name="int0" type="xsd:int" minOccurs="0"/>
+				<xsd:element name="integer0" type="xsd:integer" minOccurs="0"/>
+				<xsd:element name="long0" type="xsd:long" minOccurs="0"/>
+				<xsd:element name="negativeInteger0" type="xsd:negativeInteger" minOccurs="0"/>
+				<xsd:element name="nonNegativeInteger0" type="xsd:nonNegativeInteger" minOccurs="0"/>
+				<xsd:element name="nonPositiveInteger0" type="xsd:nonPositiveInteger" minOccurs="0"/>
+				<xsd:element name="positiveInteger0" type="xsd:positiveInteger" minOccurs="0"/>
+				<xsd:element name="short0" type="xsd:short" minOccurs="0"/>
+				<xsd:element name="unsignedLong0" type="xsd:unsignedLong" minOccurs="0"/>
+				<xsd:element name="unsignedInt0" type="xsd:unsignedInt" minOccurs="0"/>
+				<xsd:element name="unsignedShort0" type="xsd:unsignedShort" minOccurs="0"/>
+				<xsd:element name="unsignedByte0" type="xsd:unsignedByte" minOccurs="0"/>
+				<xsd:element name="double0" type="xsd:double" minOccurs="0"/>
+				<xsd:element name="float0" type="xsd:float" minOccurs="0"/>
+				<xsd:element name="string0" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="boolean0" type="xsd:boolean" minOccurs="0"/>
+				
+				<xsd:element name="byte1" type="byte1" minOccurs="0"/>
+				<xsd:element name="decimal1" type="decimal1" minOccurs="0"/>
+				<xsd:element name="int1" type="int1" minOccurs="0"/>
+				<xsd:element name="integer1" type="integer1" minOccurs="0"/>
+				<xsd:element name="long1" type="long1" minOccurs="0"/>
+				<xsd:element name="negativeInteger1" type="negativeInteger1" minOccurs="0"/>
+				<xsd:element name="nonNegativeInteger1" type="nonNegativeInteger1" minOccurs="0"/>
+				<xsd:element name="nonPositiveInteger1" type="nonPositiveInteger1" minOccurs="0"/>
+				<xsd:element name="positiveInteger1" type="positiveInteger1" minOccurs="0"/>
+				<xsd:element name="short1" type="short1" minOccurs="0"/>
+				<xsd:element name="unsignedLong1" type="unsignedLong1" minOccurs="0"/>
+				<xsd:element name="unsignedInt1" type="unsignedInt1" minOccurs="0"/>
+				<xsd:element name="unsignedShort1" type="unsignedShort1" minOccurs="0"/>
+				<xsd:element name="unsignedByte1" type="unsignedByte1" minOccurs="0"/>
+				<xsd:element name="double1" type="double1" minOccurs="0"/>
+				<xsd:element name="float1" type="float1" minOccurs="0"/>
+				<xsd:element name="string1" type="string1" minOccurs="0"/>
+				<xsd:element name="boolean1" type="boolean1" minOccurs="0"/>
+				
+				<xsd:element name="byte2" type="byte2" minOccurs="0"/>
+				<xsd:element name="decimal2" type="decimal2" minOccurs="0"/>
+				<xsd:element name="decimal22" type="decimal22" minOccurs="0"/>
+				<xsd:element name="int2" type="int2" minOccurs="0"/>
+				<xsd:element name="integer2" type="integer2" minOccurs="0"/>
+				<xsd:element name="long2" type="long2" minOccurs="0"/>
+				<xsd:element name="negativeInteger2" type="negativeInteger2" minOccurs="0"/>
+				<xsd:element name="nonNegativeInteger2" type="nonNegativeInteger2" minOccurs="0"/>
+				<xsd:element name="nonPositiveInteger2" type="nonPositiveInteger2" minOccurs="0"/>
+				<xsd:element name="positiveInteger2" type="positiveInteger2" minOccurs="0"/>
+				<xsd:element name="short2" type="short2" minOccurs="0"/>
+				<xsd:element name="unsignedLong2" type="unsignedLong2" minOccurs="0"/>
+				<xsd:element name="unsignedInt2" type="unsignedInt2" minOccurs="0"/>
+				<xsd:element name="unsignedShort2" type="unsignedShort2" minOccurs="0"/>
+				<xsd:element name="unsignedByte2" type="unsignedByte2" minOccurs="0"/>
+				<xsd:element name="double2" type="double2" minOccurs="0"/>
+				<xsd:element name="float2" type="float2" minOccurs="0"/>
+				<xsd:element name="string2" type="string2" minOccurs="0"/>
+				<xsd:element name="string22" type="string22" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:simpleType name="mySimpleType">
+		<xsd:restriction base="base:mySimpleType">
+			<xsd:maxInclusive value="900.1"/>
+			<xsd:totalDigits value="6"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="mySimpleContent">
+		<xsd:simpleContent>
+			<xsd:extension base="mySimpleType"></xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="myComplexType">
+		<xsd:sequence>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="TypeTest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="xsd0" type="xsd:int" minOccurs="0"/>
+				<xsd:element name="xsd1" type="xsd:int"/>
+				<xsd:element name="simpleType0" type="mySimpleType" minOccurs="0"/>
+				<xsd:element name="simpleType1" type="mySimpleType"/>
+				<xsd:element name="simpleContent0" type="mySimpleContent" minOccurs="0"/>
+				<xsd:element name="simpleContent1" type="mySimpleContent"/>
+				<xsd:element name="complexType0" type="myComplexType" minOccurs="0"/>
+				<xsd:element name="complexType1" type="myComplexType"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>

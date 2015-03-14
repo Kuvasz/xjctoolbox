@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://xjctoolbox.examples.base"
+	targetNamespace="http://xjctoolbox.examples.base"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb">
+
+	
+	<xsd:simpleType name="mySimpleType">
+		<xsd:restriction base="xsd:decimal">
+			<xsd:minInclusive value="10.1"/>
+			<xsd:maxInclusive value="1000.1"/>
+			<xsd:totalDigits value="7"/>
+			<xsd:fractionDigits value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>

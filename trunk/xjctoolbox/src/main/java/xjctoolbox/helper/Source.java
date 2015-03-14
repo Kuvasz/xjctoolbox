@@ -15,23 +15,6 @@ public class Source
 		this.source = source;
 	}
 	
-	/*
-	public Object getPropertySafe(String path)
-	{
-		notNull(path, "path is null");
-		
-		try
-		{
-			return getProperty(source, path);
-		}
-		catch (Exception e)
-		{
-			
-			return null;
-		}
-	}
-	*/
-	
 	public int getInt(String path)
 	{
 		notNull(path, "path is null");
@@ -73,18 +56,8 @@ public class Source
 		{
 			try
 			{
-				int separatorIndex = path.indexOf(".");
-				if (separatorIndex < 0)
-				{
-					Field field = getField(source.getClass(), path, true);
-					prop = field.get(source);
-				}
-				else
-				{
-					Field field = getField(source.getClass(), path.substring(0, separatorIndex), false);
-					Object nextSource = field.get(source);
-					prop = get(nextSource, path.substring(separatorIndex + 1));
-				}
+				Field field = getField(source.getClass(), path, true);
+				prop = field.get(source);
 			}
 			catch (Exception e)
 			{
