@@ -5,7 +5,6 @@ import java.io.StringWriter;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -43,9 +42,7 @@ public class JsonMappingTest
 		objectMapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(jaxbIntrospector, jacksonIntrospector));
 	}
 	
-	// TODO
 	@Test
-	@Ignore
 	public void testMarshal() throws JsonGenerationException, JsonMappingException, IOException
 	{
 		User user = newUser();

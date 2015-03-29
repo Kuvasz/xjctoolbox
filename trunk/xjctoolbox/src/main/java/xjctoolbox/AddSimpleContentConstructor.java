@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sun.codemodel.JBlock;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JConditional;
@@ -61,6 +62,19 @@ public class AddSimpleContentConstructor extends AbstractProcessor
 		WRAPPERS = Collections.unmodifiableSet(wrappers);
 	}
 	
+	protected String jsonSerializer;
+	
+	public String getJsonSerializer()
+	{
+		return jsonSerializer;
+	}
+
+	public void setJsonSerializer(String jsonSerializer)
+	{
+		this.jsonSerializer = jsonSerializer;
+	}
+	
+
 	@Override
 	public void process()
 	{
@@ -72,6 +86,10 @@ public class AddSimpleContentConstructor extends AbstractProcessor
 			appendToString();
 			appendEquals();
 			appendHashCode();
+			if (jsonSerializer != null)
+			{
+				appendJsonSerializer();
+			}
 			
 			log("Constructor appended.");
 		}
@@ -226,6 +244,12 @@ public class AddSimpleContentConstructor extends AbstractProcessor
 			ct._return(field.invoke("hashCode"));
 			ce._return(JExpr._super().invoke("hashCode"));
 		}
+	}
+	
+	protected void appendJsonSerializer()
+	{
+		JClass serializerImpl = getOutline().getModel().codeModel.ref(jsonSerializer);
+		getImplClass().annotate(JsonSerialize.class).param("using", serializerImpl);
 	}
 	
 	private static class PrimitiveConst
